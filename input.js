@@ -30,6 +30,9 @@ const handleUserInput = (data) => {
   case 'd':
     connection.write("Move: right");
     break;
+  case 't':
+    connection.write("Say: SNEAKY SNAKE");
+    break;
   }
 };
 
