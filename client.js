@@ -8,9 +8,15 @@ const connect = () => {
   });
   conn.setEncoding('utf8');
 
+  conn.on('connect', () => {
+    console.log('Connected to SERVER');
+    conn.write("Name: SM");
+  });
+
   conn.on('data', (data)=>{
     console.log('SERVER: ', data);
   });
+
 
   return conn;
 };
