@@ -1,11 +1,14 @@
-const { builtinModules } = require("module");
+
+const { ENCODING, MOVE_UP_KEY, MOVE_DOWN_KEY,
+  MOVE_LEFT_KEY, MOVE_RIGHT_KEY, MESSAGES } = require("./constants");
+
 let connection;
 
 const setupInput = (conn) => {
   connection = conn;
   const stdin = process.stdin;
   stdin.setRawMode(true);
-  stdin.setEncoding('utf8');
+  stdin.setEncoding(ENCODING);
   stdin.resume();
   stdin.on("data", (data) => {
     handleUserInput(data);
@@ -19,20 +22,21 @@ const handleUserInput = (data) => {
 
   switch (data) {
   case 'w':
-    connection.write("Move: up");
+    connection.write(MOVE_UP_KEY);
     break;
   case 'a':
-    connection.write("Move: left");
+    connection.write(MOVE_LEFT_KEY);
     break;
   case 's':
-    connection.write("Move: down");
+    connection.write(MOVE_DOWN_KEY);
     break;
   case 'd':
-    connection.write("Move: right");
+    connection.write(MOVE_RIGHT_KEY);
     break;
-  case 't':
-    connection.write("Say: SNEAKY SNAKE");
-    break;
+  default:
+    if (MESSAGES[data]) {
+      connection.write(`Say: ${MESSAGES[data]}`);
+    }
   }
 };
 
