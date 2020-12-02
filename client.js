@@ -13,6 +13,12 @@ const connect = () => {
     conn.write("Name: SM");
   });
 
+  conn.on('connect', () => {
+   
+    
+     
+  });
+
   conn.on('data', (data)=>{
     console.log('SERVER: ', data);
   });
